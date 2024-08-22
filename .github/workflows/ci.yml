@@ -23,6 +23,8 @@ jobs:
         with:
           repository: wiiznokes/io.github.wiiznokes.fan-control
           ref: master
+          
+      - uses: taiki-e/install-action@just
 
       - run: |
 
