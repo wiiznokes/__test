@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  CARGO_TERM_COLOR: always
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: wiiznokes/io.github.wiiznokes.fan-control
+
+      - run: |
+          git remotes
+          git branch
+
+          echo hello > HELLO.txt
+
+      # - name: Create Pull Request
+      #   uses: peter-evans/create-pull-request@v7-rc
+      #   with:
+      #     title: "Automatic Release Notes Generation"
+      #     base: master
+      #     branch: changelog-release
+      #     commit-message: "chore(changelog): automatic release generation (skip changelog) [skip ci]"
+      #     body: ""
+      #     delete-branch: true
+      #     branch-suffix: short-commit-hash
