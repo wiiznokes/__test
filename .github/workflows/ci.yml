@@ -30,11 +30,6 @@ jobs:
           git fetch upstream
           git rebase upstream/master
 
-          git remote
-          git branch
-
-          echo hello > HELLO.txt
-
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7-rc
         with:
