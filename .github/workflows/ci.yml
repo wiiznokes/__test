@@ -22,20 +22,27 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: wiiznokes/io.github.wiiznokes.fan-control
+          ref: master
 
       - run: |
+
+          git remote add upstream https://github.com/flathub/io.github.wiiznokes.fan-control
+          git fetch upstream
+          git rebase upstream/master
+
           git remote
           git branch
 
           echo hello > HELLO.txt
 
-      # - name: Create Pull Request
-      #   uses: peter-evans/create-pull-request@v7-rc
-      #   with:
-      #     title: "Automatic Release Notes Generation"
-      #     base: master
-      #     branch: changelog-release
-      #     commit-message: "chore(changelog): automatic release generation (skip changelog) [skip ci]"
-      #     body: ""
-      #     delete-branch: true
-      #     branch-suffix: short-commit-hash
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request
+        with:
+          title: "Automatic Release"
+          base: master
+          branch: release
+          commit-message: "new release"
+          body: ""
+          delete-branch: true
+          branch-suffix: short-commit-hash
+          git-token: ${{ secrets.PAT_FLATHUB }}
