@@ -24,7 +24,7 @@ jobs:
           repository: wiiznokes/io.github.wiiznokes.fan-control
 
       - run: |
-          git remotes
+          git remote
           git branch
 
           echo hello > HELLO.txt
